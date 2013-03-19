@@ -1,3 +1,9 @@
+zeal (0.0+1snapshot201303171444+0000-2) quantal; urgency=low
+
+  * Fixed i386 build
+
+ -- Jerzy Kozera <jerzy.kozera@gmail.com>  Mon, 17 Mar 2013 14:44:00 +0000
+
 zeal (0.0+1snapshot201303171444+0000-1) quantal; urgency=low
 
   * Initial release
