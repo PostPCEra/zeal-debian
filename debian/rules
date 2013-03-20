@@ -13,7 +13,7 @@
 	dh $@ 
 
 configure:
-	qmake DESTDIR=target zeal/zeal.pro
+	qmake DESTDIR=target QMAKE_CXX=g++-4.7 zeal/zeal.pro
 
 clean:
 	dh_testdir
