@@ -1,3 +1,9 @@
+zeal (0.0+1snapshot201303192126+0000-2) precise; urgency=low
+
+  * Ubuntu Precise release
+
+ -- Jerzy Kozera <jerzy.kozera@gmail.com>  Tue, 20 Mar 2013 16:15:00 +0000
+
 zeal (0.0+1snapshot201303192126+0000-1) quantal; urgency=low
 
   * Imported Upstream version 0.0+1snapshot201303192126+0000
