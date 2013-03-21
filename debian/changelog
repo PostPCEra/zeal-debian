@@ -1,3 +1,9 @@
+zeal (0.0+1snapshot201303211615+0000-2) precise; urgency=low
+
+  * Imported Upstream version 0.0+1snapshot201303211615+0000 for Precise
+
+ -- Jerzy Kozera <jerzy.kozera@gmail.com>  Thu, 21 Mar 2013 16:17:00 +0000
+
 zeal (0.0+1snapshot201303211615+0000-1) quantal; urgency=low
 
   * Imported Upstream version 0.0+1snapshot201303211615+0000
