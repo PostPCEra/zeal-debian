@@ -13,7 +13,7 @@ Zeal is a simple documentation browser inspired by [Dash](http://kapeli.com/dash
 
 ![Screenshot](http://i.imgur.com/SiLvpz8.png)
 
-[More screenshots (imgur)](http://imgur.com/a/EFmzc)
+[More screenshots (imgur)](http://imgur.com/a/eVi97)
 
 
 ## How to use
@@ -29,7 +29,7 @@ You can also use Dash's docsets by putting `.docset` directories in `$HOME/.loca
 
 ## Binary packages
 
-An [Ubuntu PPA](https://launchpad.net/~jerzy-kozera/+archive/zeal-ppa) is available with Ubuntu Quantal packages.
+An [Ubuntu PPA](https://launchpad.net/~jerzy-kozera/+archive/zeal-ppa) is available with Ubuntu Precise and Quantal packages.
 
 Also a 32-bit Windows binary with all dependencies is available to download from Dropbox - [zeal.zip](https://www.dropbox.com/s/aggp899jz2lzmfa/zeal.zip) (29M).
 
