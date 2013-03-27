@@ -10,6 +10,6 @@ Homepage: https://github.com/jkozera/zeal
 
 Package: zeal
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libqt5gui5, libqt5webkit5, libqt5location5, libqt5quick5, libqt5qml5, libqt5sensors5, libqt5opengl5, libgstreamer0.10-0, libsqlite3-0, libgstreamer-plugins-base0.10-0, libxslt1.1, libqt5sql5-sqlite
+Depends: ${shlibs:Depends}, ${misc:Depends}, libqt5gui5, libqt5webkit5, libqt5location5, libqt5quick5, libqt5qml5, libqt5sensors5, libqt5opengl5, libgstreamer0.10-0, libsqlite3-0, libgstreamer-plugins-base0.10-0, libxslt1.1, libqt5sql5-sqlite, libqt5xml5
 Description: Zeal documentation browser
  Zeal is a simple documentation browser inspired by Dash. It allows searching offline copies of various programming reference documentation sets.
