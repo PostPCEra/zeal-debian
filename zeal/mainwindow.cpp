@@ -29,15 +29,7 @@
 #ifdef WIN32
 #include <windows.h>
 #else
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-#include <QtGui/5.1.0/QtGui/qpa/qplatformnativeinterface.h>
-#elif QT_VERSION >= QT_VERSION_CHECK(5, 0, 2)
-#include <QtGui/5.0.2/QtGui/qpa/qplatformnativeinterface.h>
-#elif QT_VERSION >= QT_VERSION_CHECK(5, 0, 1)
-#include <QtGui/5.0.1/QtGui/qpa/qplatformnativeinterface.h>
-#else
-#include <QtGui/5.0.0/QtGui/qpa/qplatformnativeinterface.h>
-#endif
+#include <qpa/qplatformnativeinterface.h>
 #include <xcb/xcb.h>
 #include <xcb/xcb_keysyms.h>
 #include <X11/keysym.h>
@@ -118,11 +110,16 @@ MainWindow::MainWindow(QWidget *parent) :
     settingsDialog.ui->docsetsProgress->hide();
 
     // menu
-    auto quitAction = ui->menuBar->addAction("&Quit");
+    auto fileMenu = new QMenu("&File");
+    auto quitAction = fileMenu->addAction("&Quit");
+    ui->menuBar->addMenu(fileMenu);
     quitAction->setShortcut(QKeySequence::Quit);
     connect(quitAction, &QAction::triggered, [=]() { settings.setValue("geometry", saveGeometry()); });
     connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
-    auto settingsAction = ui->menuBar->addAction("&Options");
+
+    auto editMenu = new QMenu("&Edit");
+    auto settingsAction = editMenu->addAction("&Options");
+    ui->menuBar->addMenu(editMenu);
 
     auto progressCb = [=](quint64 recv, quint64 total) {
         if(recv > 10240) { // don't show progress for non-docset pages (like Google Drive first request)
@@ -246,6 +243,7 @@ MainWindow::MainWindow(QWidget *parent) :
         if(answer == QMessageBox::Yes) {
             auto dataDir = QDir(dataLocation);
             auto docsetName = settingsDialog.ui->listView->currentIndex().data().toString();
+            zealList.removeRow(settingsDialog.ui->listView->currentIndex().row());
             if(dataDir.cd("docsets")) {
                 settingsDialog.ui->docsetsProgress->show();
                 settingsDialog.ui->deleteButton->hide();
@@ -266,7 +264,6 @@ MainWindow::MainWindow(QWidget *parent) :
                     watcher->deleteLater();
                 });
             }
-            zealList.removeRow(settingsDialog.ui->listView->currentIndex().row());
         }
     });
     connect(settingsDialog.ui->downloadButton, &QPushButton::clicked, [=] {
