@@ -1,3 +1,9 @@
+zeal (0.0+1snapshot201303281147+0000-1precise2) precise; urgency=low
+
+  * Precise package (previously not added properly...)
+
+ -- Jerzy Kozera <jerzy.kozera@gmail.com>  Thu, 28 Mar 2013 11:57:00 +0000
+
 zeal (0.0+1snapshot201303281147+0000-1precise1) quantal; urgency=low
 
   * Precise package
