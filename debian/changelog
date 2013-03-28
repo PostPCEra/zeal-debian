@@ -1,3 +1,9 @@
+zeal (0.0+1snapshot201303281147+0000-1precise1) quantal; urgency=low
+
+  * Precise package
+
+ -- Jerzy Kozera <jerzy.kozera@gmail.com>  Thu, 28 Mar 2013 11:48:00 +0000
+
 zeal (0.0+1snapshot201303281147+0000-1) quantal; urgency=low
 
   * Added libqt5xml5 dependency
