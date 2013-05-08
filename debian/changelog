@@ -1,3 +1,9 @@
+zeal (0.0+1snapshot201305082353+0100-1precise1) precise; urgency=low
+
+  * Added precise package
+
+ -- Jerzy Kozera <jerzy.kozera@gmail.com>  Wed, 08 May 2013 23:54:00 +0100
+
 zeal (0.0+1snapshot201305082353+0100-1) raring; urgency=low
 
   * Added qtbase5-private-dev Build-Depends
