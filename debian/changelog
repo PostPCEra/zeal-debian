@@ -1,3 +1,10 @@
+zeal (0.0+1snapshot201305082353+0100-1) raring; urgency=low
+
+  * Added qtbase5-private-dev Build-Depends
+  * Imported Upstream version 0.0+1snapshot201305082353+0100
+
+ -- Jerzy Kozera <jerzy.kozera@gmail.com>  Wed, 08 May 2013 23:53:21 +0100
+
 zeal (0.0+1snapshot201303281147+0000-1precise2) precise; urgency=low
 
   * Precise package (previously not added properly...)
