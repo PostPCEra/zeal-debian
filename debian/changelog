@@ -1,3 +1,10 @@
+zeal (0.0+1snapshot201305312045+0100-1) raring; urgency=low
+
+  * Bumping version to recompile with Qt 5.0.2
+  * Imported Upstream version 0.0+1snapshot201305312045+0100
+
+ -- Jerzy Kozera <jerzy.kozera@gmail.com>  Fri, 31 May 2013 20:45:54 +0100
+
 zeal (0.0+1snapshot201305082353+0100-1quantal1) quantal; urgency=low
 
   * Added quantal package
