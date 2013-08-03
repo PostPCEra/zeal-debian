@@ -1,3 +1,9 @@
+zeal (0.0+1snapshot201308030334+0100-1) precise; urgency=low
+
+  * Imported Upstream version 0.0+1snapshot201308030334+0100
+
+ -- Jerzy Kozera <jerzy.kozera@gmail.com>  Sat, 03 Aug 2013 03:34:47 +0100
+
 zeal (0.0+1snapshot201305312045+0100-1precise1) precise; urgency=low
 
   * Added precise package
