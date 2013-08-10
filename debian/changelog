@@ -1,3 +1,9 @@
+zeal (0.0+1snapshot201308101552+0100-1) precise; urgency=low
+
+  * Imported Upstream version 0.0+1snapshot201308101552+0100
+
+ -- Jerzy Kozera <jerzy.kozera@gmail.com>  Sat, 10 Aug 2013 15:52:23 +0100
+
 zeal (0.0+1snapshot201308030334+0100-1raring1) raring; urgency=low
 
   * Added raring package
