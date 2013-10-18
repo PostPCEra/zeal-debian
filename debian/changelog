@@ -1,3 +1,9 @@
+zeal (0.0+1snapshot201310111731+0100-1saucy1) saucy; urgency=low
+
+  * Added saucy package
+
+ -- Jerzy Kozera <jerzy.kozera@gmail.com>  Fri, 18 Oct 2013 22:30:30 +0100
+
 zeal (0.0+1snapshot201310111731+0100-1raring1) raring; urgency=low
 
   * Added raring package
