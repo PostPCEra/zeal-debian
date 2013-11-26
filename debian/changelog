@@ -1,3 +1,9 @@
+zeal (0.0+1snapshot201311261115+0100-2) precise; urgency=low
+
+  * Added bsdtar dependency
+
+ -- Jerzy Kozera <jerzy.kozera@gmail.com>  Tue, 26 Nov 2013 11:17:20 +0100
+
 zeal (0.0+1snapshot201311261115+0100-1) precise; urgency=low
 
   * Imported Upstream version 0.0+1snapshot201311261115+0100
