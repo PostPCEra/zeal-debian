@@ -8,6 +8,7 @@
 #include <QDir>
 #include <QIcon>
 #include <QMap>
+#include <QSettings>
 
 #include "zealsearchresult.h"
 
@@ -78,9 +79,18 @@ public:
         types.remove(name);
     }
 
+    void clear() {
+        for(auto key : dbs.keys()) {
+            remove(key);
+        }
+    }
+
     QString prepareQuery(const QString& rawQuery);
     void runQuery(const QString& query);
     const QList<ZealSearchResult>& getQueryResults();
+
+    QString docsetsDir();
+    void initialiseDocsets();
 
 signals:
     void queryCompleted();
@@ -104,7 +114,8 @@ private:
     QMap<QString, QDir> dirs;
     QMap<QString, DocSetType> types;
     QList<ZealSearchResult> queryResults;
-    int lastQuery = -1;
+    QSettings settings;
+    int lastQuery;
 };
 
 extern ZealDocsetsRegistry* docsets;
