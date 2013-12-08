@@ -1,3 +1,9 @@
+zeal (0.0+1snapshot201312081224+0100-1saucy3) saucy; urgency=low
+
+  * Removed g++-4.7 dependency
+
+ -- Jerzy Kozera <jerzy.kozera@gmail.com>  Sun, 08 Dec 2013 12:56:00 +0100
+
 zeal (0.0+1snapshot201312081224+0100-1saucy2) saucy; urgency=low
 
   * Added build-essential to build deps
