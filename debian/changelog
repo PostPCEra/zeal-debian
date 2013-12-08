@@ -1,3 +1,9 @@
+zeal (0.0+1snapshot201312081224+0100-1saucy5) saucy; urgency=low
+
+  * Reverted
+
+ -- Jerzy Kozera <jerzy.kozera@gmail.com>  Sun, 08 Dec 2013 13:08:00 +0100
+
 zeal (0.0+1snapshot201312081224+0100-1saucy4) saucy; urgency=low
 
   * Another attempt at fixing saucy package...
