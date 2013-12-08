@@ -1,3 +1,9 @@
+zeal (0.0+1snapshot201312081224+0100-1saucy2) saucy; urgency=low
+
+  * Added build-essential to build deps
+
+ -- Jerzy Kozera <jerzy.kozera@gmail.com>  Sun, 08 Dec 2013 12:41:00 +0100
+
 zeal (0.0+1snapshot201312081224+0100-1saucy1) saucy; urgency=low
 
   * Added saucy package
