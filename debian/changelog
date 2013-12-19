@@ -1,3 +1,9 @@
+zeal (0.0+1snapshot201312200057+0100-1) precise; urgency=low
+
+  * Imported Upstream version 0.0+1snapshot201312200057+0100
+
+ -- Jerzy Kozera <jerzy.kozera@gmail.com>  Fri, 20 Dec 2013 00:57:30 +0100
+
 zeal (0.0+1snapshot201312081224+0100-1saucy5) saucy; urgency=low
 
   * Reverted
