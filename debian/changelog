@@ -1,3 +1,9 @@
+zeal (0.0+1snapshot201312242242+0100-1) precise; urgency=low
+
+  * Imported Upstream version 0.0+1snapshot201312242242+0100
+
+ -- Jerzy Kozera <jerzy.kozera@gmail.com>  Tue, 24 Dec 2013 22:42:57 +0100
+
 zeal (0.0+1snapshot201312200131+0100-1saucy1) saucy; urgency=low
 
   * Added saucy package

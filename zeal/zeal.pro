@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     zealsearchitemstyle.cpp \
     zealsettingsdialog.cpp \
     zealnetworkaccessmanager.cpp \
-    zealsearchquery.cpp
+    zealsearchquery.cpp \
+    progressitemdelegate.cpp
 
 HEADERS  += mainwindow.h \
     zeallistmodel.h \
@@ -39,7 +40,8 @@ HEADERS  += mainwindow.h \
     zealsettingsdialog.h \
     xcb_keysym.h \
     zealnetworkaccessmanager.h \
-    zealsearchquery.h
+    zealsearchquery.h \
+    progressitemdelegate.h
 
 FORMS    += mainwindow.ui \
     zealsettingsdialog.ui
@@ -52,7 +54,7 @@ macx:QMAKE_CXXFLAGS += -mmacosx-version-min=10.7 -stdlib=libc+
 macx:CONFIG += c++11
 
 win32:DEFINES += WIN32 QUAZIP_BUILD
-DEFINES += ZEAL_VERSION=\\\"20131220\\\"
+DEFINES += ZEAL_VERSION=\\\"20131224\\\"
 LIBS += -lz
 
 unix:!macx: LIBS += -lxcb -lxcb-keysyms
@@ -61,7 +63,9 @@ unix:!macx: DEFINES += LINUX
 
 icons.path=/usr/share/pixmaps/zeal
 icons.files=icons/*
-unix:INSTALLS += icons
+desktop.path=/usr/share/applications
+desktop.files=zeal.desktop
+unix:INSTALLS += icons desktop
 
 include (widgets/widgets.pri)
 include (quazip/quazip.pri)
