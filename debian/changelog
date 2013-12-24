@@ -1,3 +1,9 @@
+zeal (0.0+1snapshot201312242242+0100-1raring1) raring; urgency=low
+
+  * Added raring package
+
+ -- Jerzy Kozera <jerzy.kozera@gmail.com>  Tue, 24 Dec 2013 22:44:30 +0100
+
 zeal (0.0+1snapshot201312242242+0100-1quantal1) quantal; urgency=low
 
   * Added quantal package
