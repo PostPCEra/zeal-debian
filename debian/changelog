@@ -1,3 +1,9 @@
+zeal (0.0+1snapshot201401200122+0100-1quantal1) quantal; urgency=low
+
+  * Added quantal package
+
+ -- Jerzy Kozera <jerzy.kozera@gmail.com>  Mon, 20 Jan 2014 01:23:24 +0100
+
 zeal (0.0+1snapshot201401200122+0100-1) precise; urgency=low
 
   * Imported Upstream version 0.0+1snapshot201401200122+0100
