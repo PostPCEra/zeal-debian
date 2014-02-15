@@ -36,9 +36,17 @@ SearchableWebView::SearchableWebView(QWidget *parent) :
     });
 
     connect(&webView, &QWebView::urlChanged, this, &SearchableWebView::urlChanged);
+    connect(&webView, &QWebView::titleChanged, this, &SearchableWebView::titleChanged);
 
     connect(&webView, &QWebView::loadStarted, [&]() {
         lineEdit.clear();
+    });
+
+    // Display tooltip showing link location when hovered over.
+    connect(webView.page(), &QWebPage::linkHovered, [&](const QString &link, const QString &title, const QString &textContent){
+        if( !link.startsWith("file:///") ){
+            setToolTip( link );
+        }
     });
 }
 
@@ -58,7 +66,10 @@ void SearchableWebView::resizeEvent(QResizeEvent *event) {
 
 void SearchableWebView::keyPressEvent(QKeyEvent *event) {
     if(event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) {
-        webView.findText(searchText, QWebPage::FindWrapsAroundDocument);
+        QWebPage::FindFlags flags = QWebPage::FindWrapsAroundDocument;
+        if( event->modifiers() & Qt::ShiftModifier )
+            flags |= QWebPage::FindBackward;
+        webView.findText(searchText, flags);
     }
     if(event->key() == Qt::Key_Escape) {
         lineEdit.clear();
