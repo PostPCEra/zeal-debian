@@ -1,3 +1,9 @@
+zeal (0.0+1snapshot201404221514+0200-1) trusty; urgency=low
+
+  * Imported Upstream version 0.0+1snapshot201404221514+0200
+
+ -- Jerzy Kozera <jerzy.kozera@gmail.com>  Tue, 22 Apr 2014 15:14:55 +0200
+
 zeal (0.0+1snapshot201402150801+0100-1saucy2) saucy; urgency=low
 
   * Another saucy version to allow rebuilding with different PPA deps
