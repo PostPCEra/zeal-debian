@@ -3,15 +3,22 @@
 
 #include <QDialog>
 #include <QNetworkAccessManager>
+#include <QInputDialog>
+#include <QtNetwork/QNetworkProxy>
 #include <QSettings>
+#include <QClipboard>
+#include <QUrl>
 
 #include "ui_zealsettingsdialog.h"
 #include "zeallistmodel.h"
 #include "zealdocsetsregistry.h"
+#include "zealdocsetmetadata.h"
 
 class ZealSettingsDialog : public QDialog
 {
     Q_OBJECT
+
+    Q_ENUMS(ProxyType)
     
 public:
     explicit ZealSettingsDialog(ZealListModel &zlist, QWidget *parent = 0);
@@ -21,6 +28,14 @@ public:
     
     Ui::ZealSettingsDialog *ui;
 
+    enum ProxyType {
+        NoProxy,
+        SystemProxy,
+        UserDefinedProxy
+    };
+
+    QNetworkProxy httpProxy() const;
+
 protected:
     void showEvent(QShowEvent *);
 
@@ -29,8 +44,10 @@ private:
     void endTasks(qint8 tasks);
     void displayProgress();
     void loadSettings();
-    void DownloadCompleteCb(QNetworkReply *reply);
+    void updateDocsets();
     void resetProgress();
+    QNetworkReply *startDownload(const QUrl &url, qint8 retries = 0);
+    QNetworkReply *startDownload(const ZealDocsetMetadata &meta, qint8 retries = 0);
     void stopDownloads();
     void saveSettings();
 
@@ -41,7 +58,12 @@ private:
 signals:
     void refreshRequested();
     void minFontSizeChanged(int minFont);
+
 private slots:
+    void downloadDocsetList();
+    void extractDocset();
+    void downloadDocsetLists();
+
     void on_downloadProgress(quint64 recv, quint64 total);
 
     void on_downloadButton_clicked();
@@ -68,17 +90,26 @@ private slots:
 
     void on_buttonBox_clicked(QAbstractButton *button);
 
+    void on_updateButton_clicked();
+
+    void on_addFeedButton_clicked();
+
 private:
     ZealListModel &zealList;
     QNetworkAccessManager naManager;
     QSettings settings;
     bool downloadedDocsetsList;
-    QMap<QString, QString> urls;
+    QMap<QString, ZealDocsetMetadata> availMetadata;
     QHash<QNetworkReply*, qint8> replies;
     QHash<QNetworkReply*, QPair<qint32, qint32>*> progress;
     qint32 totalDownload;
     qint32 currentDownload;
     qint32 tasksRunning;
+
+    ZealSettingsDialog::ProxyType proxyType() const;
+    void setProxyType(ZealSettingsDialog::ProxyType type);
 };
+
+Q_DECLARE_METATYPE(ZealSettingsDialog::ProxyType)
 
 #endif // ZEALSETTINGSDIALOG_H

@@ -32,6 +32,7 @@
 #include <xcb/xcb_keysyms.h>
 #include <X11/keysym.h>
 #include "xcb_keysym.h"
+#include <gtk/gtk.h>
 #endif
 
 const QString serverName = "zeal_process_running";
@@ -43,10 +44,8 @@ MainWindow::MainWindow(QWidget *parent) :
     settingsDialog(zealList)
 {
     trayIcon = nullptr;
+    indicator = nullptr;
     trayIconMenu = nullptr;
-
-    // Use the platform-specific proxy settings
-    QNetworkProxyFactory::setUseSystemConfiguration(true);
 
     // server for detecting already running instances
     localServer = new QLocalServer(this);
@@ -68,10 +67,13 @@ MainWindow::MainWindow(QWidget *parent) :
 #endif
 
     // initialise icons
-#if defined(WIN32) || defined(OSX)
+#if defined(OSX)
     icon = qApp->style()->standardIcon(QStyle::SP_MessageBoxInformation);
+#elif defined(WIN32)
+    icon = QIcon(":/zeal.ico");
 #else
-    icon = QIcon::fromTheme("edit-find");
+    QIcon::setThemeName("hicolor");
+    icon = QIcon::fromTheme("zeal");
 #endif
     setWindowIcon(icon);
     if(settings.value("hidingBehavior", "systray").toString() == "systray")
@@ -89,7 +91,7 @@ MainWindow::MainWindow(QWidget *parent) :
         if(!isVisible() || !isActiveWindow()) {
             bringToFront(true);
         } else {
-            if(trayIcon) {
+            if(trayIcon || indicator) {
                 hide();
             } else {
                 showMinimized();
@@ -114,6 +116,7 @@ MainWindow::MainWindow(QWidget *parent) :
     });
     ui->webView->settings()->setFontSize(QWebSettings::MinimumFontSize, settings.value("minFontSize").toInt());
     ZealNetworkAccessManager * zealNaManager = new ZealNetworkAccessManager();
+    zealNaManager->setProxy(settingsDialog.httpProxy());
     ui->webView->page()->setNetworkAccessManager(zealNaManager);
 
     // menu
@@ -171,7 +174,10 @@ MainWindow::MainWindow(QWidget *parent) :
     // (Only the frame is larger than the list item, which is different from default behaviour.)
     ui->treeView->setSelectionBehavior(QAbstractItemView::SelectRows);
 #endif
+    bool treeViewClicked = false;
+
     connect(ui->treeView, &QTreeView::clicked, [&](const QModelIndex& index) {
+        treeViewClicked = true;
        ui->treeView->activated(index);
     });
     connect(ui->treeView, &QTreeView::activated, [&](const QModelIndex& index) {
@@ -182,6 +188,11 @@ MainWindow::MainWindow(QWidget *parent) :
                 url.setFragment(url_l[1]);
             }
             ui->webView->load(url);
+
+            if (!treeViewClicked)
+                ui->webView->focus();
+            else
+                treeViewClicked = false;
         }
     });
     connect(ui->forwardButton, &QPushButton::clicked, this, &MainWindow::forward);
@@ -204,6 +215,8 @@ MainWindow::MainWindow(QWidget *parent) :
     });
 
     connect(&zealSearch, &ZealSearchModel::queryCompleted, [&]() {
+        treeViewClicked = true;
+
         ui->treeView->setModel(&zealSearch);
         ui->treeView->reset();
         ui->treeView->setColumnHidden(1, true);
@@ -248,23 +261,55 @@ void MainWindow::forward() {
     displayViewActions();
 }
 
+void onQuit(GtkMenu *menu, gpointer data)
+{
+    Q_UNUSED(menu);
+    QApplication *self = static_cast<QApplication *>(data);
+    self->quit();
+}
+
 void MainWindow::createTrayIcon()
 {
-    if(trayIcon) return;
-    trayIconMenu = new QMenu(this);
-    auto quitAction = trayIconMenu->addAction("&Quit");
-    connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
-    trayIcon = new QSystemTrayIcon(this);
-    trayIcon->setContextMenu(trayIconMenu);
-    trayIcon->setIcon(icon);
-    trayIcon->setToolTip("Zeal");
-    connect(trayIcon, &QSystemTrayIcon::activated, [&](QSystemTrayIcon::ActivationReason reason) {
-        if(reason == QSystemTrayIcon::Trigger || reason == QSystemTrayIcon::DoubleClick) {
-            if(isVisible()) hide();
-            else bringToFront(false);
-        }
-    });
-    trayIcon->show();
+    if(trayIcon || indicator) return;
+
+    QString desktop;
+    bool isUnity;
+
+    desktop = getenv("XDG_CURRENT_DESKTOP");
+    isUnity = (desktop.toLower() == "unity");
+
+    if(isUnity) //Application Indicators for Unity
+    {
+        GtkWidget *menu;
+        GtkWidget *quitItem;
+
+        menu = gtk_menu_new();
+
+        quitItem = gtk_menu_item_new_with_label("Quit");
+        gtk_menu_shell_append(GTK_MENU_SHELL(menu), quitItem);
+        g_signal_connect(quitItem, "activate", G_CALLBACK(onQuit), qApp);
+        gtk_widget_show(quitItem);
+
+        indicator = app_indicator_new("zeal", icon.name().toLatin1().data(), APP_INDICATOR_CATEGORY_OTHER);
+
+        app_indicator_set_status(indicator, APP_INDICATOR_STATUS_ACTIVE);
+        app_indicator_set_menu(indicator, GTK_MENU(menu));
+    } else {  //others
+        trayIconMenu = new QMenu(this);
+        auto quitAction = trayIconMenu->addAction("&Quit");
+        connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
+        trayIcon = new QSystemTrayIcon(this);
+        trayIcon->setContextMenu(trayIconMenu);
+        trayIcon->setIcon(icon);
+        trayIcon->setToolTip("Zeal");
+        connect(trayIcon, &QSystemTrayIcon::activated, [&](QSystemTrayIcon::ActivationReason reason) {
+            if(reason == QSystemTrayIcon::Trigger || reason == QSystemTrayIcon::DoubleClick) {
+                if(isVisible()) hide();
+                else bringToFront(false);
+            }
+        });
+        trayIcon->show();
+    }
 }
 
 void MainWindow::bringToFront(bool withHack)
