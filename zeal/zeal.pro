@@ -11,6 +11,7 @@ TARGET = zeal
 target.path = /usr/bin
 INSTALLS = target
 TEMPLATE = app
+ICON = zeal.icns
 
 
 SOURCES += main.cpp\
@@ -27,7 +28,8 @@ SOURCES += main.cpp\
     zealnetworkaccessmanager.cpp \
     zealsearchquery.cpp \
     progressitemdelegate.cpp \
-    zealdocsetmetadata.cpp
+    zealdocsetmetadata.cpp \
+    zealdocsetinfo.cpp
 
 HEADERS  += mainwindow.h \
     zeallistmodel.h \
@@ -43,11 +45,8 @@ HEADERS  += mainwindow.h \
     zealnetworkaccessmanager.h \
     zealsearchquery.h \
     progressitemdelegate.h \
-    zealdocsetmetadata.h
-
-INCLUDEPATH += /usr/include/libappindicator-0.1 \
-        /usr/include/gtk-2.0 \
-        /usr/lib/gtk-2.0/include \
+    zealdocsetmetadata.h \
+    zealdocsetinfo.h
 
 FORMS    += mainwindow.ui \
     zealsettingsdialog.ui
@@ -62,15 +61,23 @@ macx:CONFIG += c++11
 win32:RC_ICONS = zeal.ico
 win32:DEFINES += WIN32 QUAZIP_BUILD
 DEFINES += ZEAL_VERSION=\\\"20140215\\\"
-LIBS += -lz -L/usr/lib -lappindicator
+LIBS += -lz -L/usr/lib
 
 CONFIG += link_pkgconfig
-
-PKGCONFIG = gtk+-2.0
 
 unix:!macx: LIBS += -lxcb -lxcb-keysyms
 unix:!macx: SOURCES += xcb_keysym.cpp
 unix:!macx: DEFINES += LINUX
+
+unix:!macx:!no_libappindicator {
+    INCLUDEPATH += /usr/include/libappindicator-0.1 \
+        /usr/include/gtk-2.0 \
+        /usr/lib/gtk-2.0/include
+    PKGCONFIG = gtk+-2.0
+    LIBS += -lappindicator
+
+    DEFINES += USE_LIBAPPINDICATOR
+}
 
 appicons16.path=/usr/share/icons/hicolor/16x16/apps
 appicons24.path=/usr/share/icons/hicolor/24x24/apps
@@ -93,3 +100,6 @@ include (quazip/quazip.pri)
 
 RESOURCES += \
     zeal.qrc
+
+OTHER_FILES += \
+    zeal.icns
