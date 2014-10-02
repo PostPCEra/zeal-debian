@@ -1,3 +1,9 @@
+zeal (0.0+1snapshot201410022253+0200-1) trusty; urgency=medium
+
+  * Imported Upstream version 0.0+1snapshot201410022253+0200
+
+ -- Jerzy Kozera <jerzy.kozera@gmail.com>  Thu, 02 Oct 2014 22:53:52 +0200
+
 zeal (0.0+1snapshot201406201331+0200-1) trusty; urgency=medium
 
   * Added libappindicator-dev
