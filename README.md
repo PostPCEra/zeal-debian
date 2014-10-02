@@ -31,6 +31,7 @@ If you prefer to compile Zeal manually.
 * Qt 5.0
 * X C Binding – keysyms (Ubuntu `libxcb-keysyms1-dev`)
 * `bsdtar` is required for the built-in docset extracting to work
+* `libappindicator` and `libappindicator-devel` for notifications
 
 To compile it, run `qmake` and `make` in the `zeal` directory. On Linux, a final `make install` is required to install icons.
 
@@ -39,7 +40,7 @@ To compile it, run `qmake` and `make` in the `zeal` directory. On Linux, a final
  * [Issues](https://github.com/jkozera/zeal/issues)
  * Search enhancements - some ideas:
    * Allow selecting subset of docsets to search in (enable/disable docsets, docset groups)
-   * Grouping of similar results (like overloaded funcdtions)
+   * Grouping of similar results (like overloaded functions)
  * Code cleanup
    * Refactoring to reuse common code between `ZealDocsetsRegistry` and `ZealListModel`
    * ...
